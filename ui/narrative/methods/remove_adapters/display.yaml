@@ -4,7 +4,7 @@
 name: Cutadapt - v1.18
 
 tooltip: |
-    Removes 3' or 5' adapters from reads using cutadapt
+    Removes the 3' or 5' adapters from reads using cutadapt.
 
 screenshots: []
 
@@ -15,7 +15,7 @@ icon: cutadapt-pink.png
 #
 suggestions:
     apps:
-        related: [kb_trimmomatic/run_trimmomatic]
+        related: []
         next: []
 
 #
@@ -24,41 +24,41 @@ suggestions:
 parameters :
     input_reads :
         ui-name : Input Reads or ReadsSet
-        short-hint : The reads library (or reads set) to process
+        short-hint : The reads library or ReadsSet to cut the adapters off of.
 
     output_object_name :
         ui-name : Output Reads
-        short-hint : Name for the output read library (or reads set)
+        short-hint : The name for the output read library or ReadsSet.
 
     adapter_sequence_5P:
         ui-name: Sequence
-        short-hint: The Adapter sequence to match; wildcards can be marked by 'N'
+        short-hint: The adapter sequence to match (wildcards can be marked by 'N').
     anchored_5P:
         ui-name: Anchored
-        short-hint: Anchor the match to the 5 end of each read
+        short-hint: Anchor the match to the 5' end of each read.
 
     adapter_sequence_3P:
         ui-name: Sequence
-        short-hint: The Adapter sequence to match; wildcards can be marked by 'N'
+        short-hint: The adapter sequence to match (wildcards can be marked by 'N').
     anchored_3P:
         ui-name: Anchored
-        short-hint: Anchor the match to the 3 end of each read
+        short-hint: Anchor the match to the 3' end of each read.
 
     error_tolerance:
         ui-name: Error Tolerance (Max Error Rate)
-        short-hint: Max error rate to consider a match, e.g. 0.1 allows a mismatch in 1 out of 10 bases
+        short-hint: The maximum error rate to consider a match, e.g. 0.1 allows a mismatch in 1 out of 10 bases.
 
     min_overlap_length:
         ui-name: Min Overlap Length
-        short-hint: Minimum length required to consider a match
+        short-hint: The minimum length required to consider a match.
 
     min_read_length:
         ui-name: Min Read Length
-        short-hint: Minimum length of cut read to retain in output library
+        short-hint: The minimum length of cut read to retain in the output library.
 
     discard_untrimmed:
         ui-name: Discard Untrimmed
-        short-hint: Keep or discard reads that don't have a matching adapter
+        short-hint: Choose whether to keep or discard reads that don't have a matching adapter.
 
 
 parameter-groups:
@@ -66,17 +66,23 @@ parameter-groups:
         ui-name: |
             5' Adapter
         short-hint: |
-            Options for trimming adapters from the 5' end
+            Options for trimming adapters from the 5' end.
     3P:
         ui-name: |
             3' Adapter
         short-hint: |
-            Options for trimming adapters from the 3' end
+            Options for trimming adapters from the 3' end.
 
 description : |
-    <p> This App removes adapter sequences from reads using <a href="https://github.com/marcelm/cutadapt">cutadapt</a>.</p>
-    <p> For more information about cutadapt and usage, please see <a href="https://cutadapt.readthedocs.io/en/stable">
-    https://cutadapt.readthedocs.io/en/stable/</a></p>
+    <p>This App removes adapter sequences from reads using <a href="https://github.com/marcelm/cutadapt">cutadapt</a>.</p>
+
+    <p>The input reads or ReadsSet and output reads can be FASTA or FASTQ format as selected by the user. Reads can be imported into the narrative using the <a href=” https://narrative.kbase.us/#appcatalog/app/kb_uploadmethods/import_fastq_sra_as_reads_from_staging”>Import FASTQ/SRA File as Reads from Staging Area</a> App.</p>
+
+    <p>Adapters can be composed of any IUPAC nucleotide or wildcard character, listed <a href=”http://www.bioinformatics.org/sms/iupac.html”>here</a>. Anchoring the adapters causes them to be removed only if they are at their respective ends of the sequence. Any matches found within the sequence are left in place. An insertion of “X” at the end of a 3’ adapter or beginning of a 5’ adapter allows the user to perform a less strict anchoring that allows for partial occurrences at the end to be trimmed while allowing full internal occurrences to be left in place. Adding three dots (…) between two sequences allows for linked adapters which trims only sequences “framed” by both adapters. To simplify adapter sequences, a number in braces repeats the preceding base, e.g. “A{5}” can be used in place of “AAAAA.” This is especially useful for removing poly-A tails.</p>
+
+    <p>Error tolerance is a decimal value to determine how many mismatched based there can be in a positive match. For example an adapter of length 22 with an error rate of 0.1 will allow for 22 * 0.1 = 2.2 errors, which would round to 2. Wildcards are not counted towards adapter length as they would not be recognized as errors. The minimum overlap defines how many residues must overlap. The minimum length determines the minimum length of reads after cutting that will be kept. The discard untrimmed selection allows the user to keep or discard sequences that lack the defined adapters.</p>
+
+    <p>For further information about cutadapt and its usage, click <a href="https://cutadapt.readthedocs.io/en/stable">here</a>.</p>
 
 publications :
     -
