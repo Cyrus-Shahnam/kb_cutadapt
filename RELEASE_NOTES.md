@@ -1,3 +1,7 @@
+### Verson 1.0.8
+__Changes__
+- fix to do specific pip install of xopen to prevent the backwards incompatibility with the newer versions that cutadapt uses by default.
+
 ### Verson 1.0.7
 __Changes__
 - fix to build from sdkbase2 image
